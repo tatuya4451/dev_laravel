@@ -36,4 +36,9 @@ class Post extends Model
     {
         return $query->public()->findOrFail($id);
     }
+
+    public function getPublishedFormatAttribute()
+    {
+        return $this->published_at->format('Y年m月d日');
+    }
 }
