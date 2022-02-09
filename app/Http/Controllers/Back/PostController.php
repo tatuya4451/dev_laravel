@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.posts.create');
     }
 
     /**
@@ -35,9 +35,19 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        Post::create($request->all());
+
+        if ($post) {
+            return redirect()
+                ->route('back.posts.edit', $post)
+                ->withSuccess('データを登録しました。');
+        } else {
+            return redirect()
+                ->route('back.posts.create')
+                ->withError('データを登録に失敗しました。');
+        }
     }
 
     /**
