@@ -27,7 +27,7 @@ class PostRequest extends FormRequest
             'title' => 'required|max:100',
             'body' => 'max:100',
             'is_public' => 'required|numeric',
-            'title' => 'required|date_format:Y-m-d H:i',
+            'published_at' => 'required|date_format:Y-m-d H:i',
         ];
     }
 
@@ -38,6 +38,6 @@ class PostRequest extends FormRequest
             'body' => '内容',
             'is_public' => 'ステータス',
             'published_at' => '公開日',
-        ]
+        ];
     }
 }

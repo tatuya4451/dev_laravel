@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -69,7 +69,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('back.posts.edit', compact('post'));
     }
 
     /**
@@ -79,9 +79,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        if ($post->update($request->all())) {
+            $flash = ['success' => 'データを更新しました'];
+        } else {
+            $flash = ['error' => 'データの更新に失敗しました'];
+        }
+
+        return redirect()
+        ->route('back.posts.edit', $post)
+        ->with($flash);
     }
 
     /**
