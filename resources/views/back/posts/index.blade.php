@@ -16,6 +16,7 @@ $title = '投稿一覧';
                     <th scope="col" style="width: 4.3em">状態</th>
                     <th scope="col" style="width: 9em">公開日</th>
                     <th scope="col" style="width: 12em">編集</th>
+                    <th scope="col" style="width: 4.3em">編集者</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,20 +30,21 @@ $title = '投稿一覧';
                         {{ link_to_route('front.posts.show', '詳細', $post, [
                             'class' => 'btn btn-secondary btn-sm m-1',
                             'target' => '_blank'
-                        ]) }}
+                            ]) }}
                         {{ link_to_route('back.posts.edit', '編集', $post, [
                             'class' => 'btn btn-secondary btn-sm m-1'
-                        ]) }}
+                            ]) }}
                         {{ Form::model($post, [
                             'route' => ['back.posts.destroy', $post],
                             'method' => 'delete'
-                        ]) }}
+                            ]) }}
                             {{ Form::submit('削除', [
                                 'onclick' => "return confirm('本当に削除しますか?')",
                                 'class' => 'btn btn-danger btn-sm m-1'
-                            ]) }}
+                                ]) }}
                         {{ Form::close() }}
                     </td>
+                    <td>{{ $post->user->name }}</td>
                 </tr>
             @endforeach
             </tbody>

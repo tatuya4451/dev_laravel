@@ -19,6 +19,11 @@ class Post extends Model
         'published_at' => 'datetime'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopePublic(Builder $query)
     {
         return $query->where('is_public', true);
