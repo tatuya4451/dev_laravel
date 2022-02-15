@@ -19,6 +19,15 @@ class Post extends Model
         'published_at' => 'datetime'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::saving(function($post) {
+            $post->user_id = \Auth::id();
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
